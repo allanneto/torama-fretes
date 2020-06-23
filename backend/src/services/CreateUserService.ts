@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 
 import * as Yup from 'yup';
 import User from '../models/User';
+import AppError from '../errors/AppError';
 
 interface Request {
   name: string;
@@ -32,6 +33,10 @@ export default class CreateUserService {
       email,
       telephone,
     };
+
+    if (!(await schema.isValid(verifyUser))) {
+      throw new AppError('Validation fails');
+    }
 
     const user = usersRepository.create(verifyUser);
 
