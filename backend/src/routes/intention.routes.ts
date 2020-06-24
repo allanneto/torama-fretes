@@ -1,38 +1,16 @@
-import { Router } from 'express';
-import * as Yup from 'yup';
+import { Router } from "express";
+import { getCustomRepository } from "typeorm";
 
-interface IntentionInfo {
-  zip_code_start: string;
-  zip_code_end: string;
-  volumes: {
-    quantity: number;
-    height: number;
-    length: number;
-    width: number;
-    price: number;
-    weight: number;
-  };
-}
+import CreateIntentionService from "../services/CreateIntentionService";
+import UpdateIntentionClientService from "../services/UpdateIntentionClientService";
 
 const intentionRouter = Router();
 
-intentionRouter.get('/', async (req, res) => {
-  return res.json({ loxt: 'burrp  ' });
+intentionRouter.get("/", async (req, res) => {
+  return res.json({ loxt: "burro" });
 });
 
-intentionRouter.post('/', async (req, res) => {
-  const schema = Yup.object().shape({
-    zip_code_end: Yup.string().required(),
-    zip_code_start: Yup.string().required(),
-    volumes: Yup.object().shape({
-      quantity: Yup.number().required(),
-      height: Yup.number().required(),
-      length: Yup.number().required(),
-      price: Yup.number().required(),
-      weight: Yup.number().required(),
-    }),
-  });
-
+intentionRouter.post("/", async (req, res) => {
   const {
     zip_code_start,
     zip_code_end,
@@ -44,27 +22,36 @@ intentionRouter.post('/', async (req, res) => {
     weight,
   } = req.body;
 
-  const intention: IntentionInfo = {
-    zip_code_end,
-    zip_code_start,
-    volumes: {
-      height,
-      length,
-      price,
-      quantity,
-      weight,
+  const createIntention = new CreateIntentionService();
+
+  const intention = await createIntention.execute(
+    {
+      zip_code_start,
+      zip_code_end,
       width,
+      weight,
+      quantity,
+      price,
+      length,
+      height,
     },
+  );
+
+  return res.json(intention);
+});
+
+// Register client_id
+intentionRouter.put("/:id", async (req, res) => {
+  const updateIntention = new UpdateIntentionClientService();
+
+  const idsDTO = {
+    client_id: req.body.client_id,
+    intention_id: req.params.id,
   };
 
-  if (!(await schema.isValid(intention))) {
-    return res.json('Erro na validação.');
-  }
-  return res.json({
-    zip_code_start,
-    zip_code_end,
-    lead: false,
-  });
+  const intention = await updateIntention.execute(idsDTO);
+
+  return res.json(intention);
 });
 
 export default intentionRouter;
