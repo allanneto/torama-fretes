@@ -1,7 +1,8 @@
-import { getRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 
 import * as Yup from 'yup';
 import User from '../models/User';
+import UserRepository from '../repositories/UserRepository';
 import AppError from '../errors/AppError';
 
 interface Request {
@@ -18,12 +19,12 @@ export default class CreateUserService {
     email,
     telephone,
   }: Request): Promise<User> {
-    const usersRepository = getRepository(User);
+    const usersRepository = getCustomRepository(UserRepository);
 
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string().email().required(),
-      cnpj: Yup.string().required(),
+      cnpj: Yup.string().min(18).max(18).required(),
       telephone: Yup.string().max(13).required(),
     });
 
@@ -36,6 +37,12 @@ export default class CreateUserService {
 
     if (!(await schema.isValid(verifyUser))) {
       throw new AppError('Validation fails');
+    }
+
+    const duplicatedUser = await usersRepository.verifyDuplicated(cnpj);
+
+    if (duplicatedUser) {
+      return duplicatedUser;
     }
 
     const user = usersRepository.create(verifyUser);

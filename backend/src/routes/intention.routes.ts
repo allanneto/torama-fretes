@@ -1,16 +1,16 @@
-import { Router } from "express";
-import { getCustomRepository } from "typeorm";
+import { Router } from 'express';
 
-import CreateIntentionService from "../services/CreateIntentionService";
-import UpdateIntentionClientService from "../services/UpdateIntentionClientService";
+import fakeapi from '../api/fakeapi';
+
+import CreateIntentionService from '../services/CreateIntentionService';
+import UpdateIntentionClientService from '../services/UpdateIntentionClientService';
+
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const intentionRouter = Router();
 
-intentionRouter.get("/", async (req, res) => {
-  return res.json({ loxt: "burro" });
-});
-
-intentionRouter.post("/", async (req, res) => {
+//Register new Intention
+intentionRouter.post('/', async (req, res) => {
   const {
     zip_code_start,
     zip_code_end,
@@ -24,24 +24,22 @@ intentionRouter.post("/", async (req, res) => {
 
   const createIntention = new CreateIntentionService();
 
-  const intention = await createIntention.execute(
-    {
-      zip_code_start,
-      zip_code_end,
-      width,
-      weight,
-      quantity,
-      price,
-      length,
-      height,
-    },
-  );
+  const intention = await createIntention.execute({
+    zip_code_start,
+    zip_code_end,
+    width,
+    weight,
+    quantity,
+    price,
+    length,
+    height,
+  });
 
   return res.json(intention);
 });
 
 // Register client_id
-intentionRouter.put("/:id", async (req, res) => {
+intentionRouter.put('/:id', async (req, res) => {
   const updateIntention = new UpdateIntentionClientService();
 
   const idsDTO = {
@@ -52,6 +50,11 @@ intentionRouter.put("/:id", async (req, res) => {
   const intention = await updateIntention.execute(idsDTO);
 
   return res.json(intention);
+});
+
+// Intentions return
+intentionRouter.get('/', ensureAuthenticated, async (req, res) => {
+  return res.json(fakeapi);
 });
 
 export default intentionRouter;

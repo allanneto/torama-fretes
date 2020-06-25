@@ -1,7 +1,7 @@
-import { EntityRepository, Repository } from "typeorm";
+import { EntityRepository, Repository } from 'typeorm';
 
-import User from "../models/User";
-import AppError from "../errors/AppError";
+import User from '../models/User';
+import AppError from '../errors/AppError';
 
 @EntityRepository(User)
 class UserRepository extends Repository<User> {
@@ -9,8 +9,18 @@ class UserRepository extends Repository<User> {
     const user = await this.findOne(id);
 
     if (!user) {
-      throw new AppError("Id informado incorretamente.");
+      throw new AppError('Id informado incorretamente.');
     }
+
+    return user;
+  }
+
+  public async verifyDuplicated(cnpj: string): Promise<User | undefined> {
+    const user = await this.findOne({
+      where: {
+        cnpj,
+      },
+    });
 
     return user;
   }
