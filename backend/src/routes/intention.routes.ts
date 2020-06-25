@@ -4,6 +4,7 @@ import fakeapi from '../api/fakeapi';
 
 import CreateIntentionService from '../services/CreateIntentionService';
 import UpdateIntentionClientService from '../services/UpdateIntentionClientService';
+import UpdateIntentionLeadStatusService from '../services/UpdateIntentionLeadStatusService';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
@@ -52,8 +53,25 @@ intentionRouter.put('/:id', async (req, res) => {
   return res.json(intention);
 });
 
+intentionRouter.use(ensureAuthenticated);
+
+// Update lead status
+intentionRouter.put('/:id/lead', async (req, res) => {
+  const updateIntentionLead = new UpdateIntentionLeadStatusService();
+
+  const { freight_id } = req.body;
+  const intention_id = req.params.id;
+
+  const intention = await updateIntentionLead.execute({
+    freight_id,
+    intention_id,
+  });
+
+  return intention;
+});
+
 // Intentions return
-intentionRouter.get('/', ensureAuthenticated, async (req, res) => {
+intentionRouter.get('/', async (req, res) => {
   return res.json(fakeapi);
 });
 

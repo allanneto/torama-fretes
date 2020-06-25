@@ -31,6 +31,9 @@ class Intention {
   @Column()
   lead: boolean;
 
+  @Column()
+  freight_id: string;
+
   @CreateDateColumn()
   created_at: Date;
 
