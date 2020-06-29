@@ -1,9 +1,7 @@
-import { getCustomRepository } from 'typeorm';
-
-import * as Yup from 'yup';
-import User from '../models/User';
-import UserRepository from '../repositories/UserRepository';
-import AppError from '../errors/AppError';
+import * as Yup from "yup";
+import User from "../models/User";
+import IUsersRepository from "../repositories/IUsersRepository";
+import AppError from "../errors/AppError";
 
 interface Request {
   name: string;
@@ -13,14 +11,13 @@ interface Request {
 }
 
 export default class CreateUserService {
+  constructor(private usersRepository: IUsersRepository) {}
   public async execute({
     name,
     cnpj,
     email,
     telephone,
   }: Request): Promise<User> {
-    const usersRepository = getCustomRepository(UserRepository);
-
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string().email().required(),
@@ -35,19 +32,19 @@ export default class CreateUserService {
       telephone,
     };
 
-    if (!(await schema.isValid(verifyUser))) {
-      throw new AppError('Validation fails');
+    const validate = await schema.isValid(verifyUser);
+
+    if (!validate) {
+      throw new AppError("Validation fails");
     }
 
-    const duplicatedUser = await usersRepository.verifyDuplicated(cnpj);
+    const duplicatedUser = await this.usersRepository.verifyDuplicated(cnpj);
 
     if (duplicatedUser) {
       return duplicatedUser;
     }
 
-    const user = usersRepository.create(verifyUser);
-
-    await usersRepository.save(user);
+    const user = await this.usersRepository.create(verifyUser);
 
     return user;
   }

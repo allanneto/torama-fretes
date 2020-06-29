@@ -1,5 +1,7 @@
 import { getCustomRepository } from "typeorm";
 
+import IIntentionRepository from "../repositories/IIntentionRepository";
+import IUsersRepository from "../repositories/IUsersRepository";
 import IntentionRepository from "../repositories/IntentionRepository";
 import Intention from "../models/Intention";
 
@@ -9,26 +11,22 @@ import AppError from "../errors/AppError";
 
 interface Request {
   intention_id: string;
-
   client_id: string;
 }
 
 export default class UpdateIntentionClientService {
+  constructor(
+    private intentionRepository: IIntentionRepository,
+    private usersRepository: IUsersRepository,
+  ) {}
+
   public async execute(
     { client_id, intention_id }: Request,
   ): Promise<Intention> {
-    const intentionRepository = getCustomRepository(IntentionRepository);
-    const userRepository = getCustomRepository(UserRepository);
+    await this.usersRepository.verifyUser(client_id);
+    await this.intentionRepository.verifyClient(client_id);
 
-    await userRepository.verifyUser(client_id);
-    await intentionRepository.verifyClient(client_id);
-
-    const intention = await intentionRepository.findOne({
-      where: {
-        id: intention_id,
-        client_id: null,
-      },
-    });
+    const intention = await this.intentionRepository.findById(intention_id);
 
     if (!intention) {
       throw new AppError(
@@ -38,7 +36,7 @@ export default class UpdateIntentionClientService {
 
     intention.client_id = client_id;
 
-    await intentionRepository.save(intention);
+    await this.intentionRepository.save(intention);
 
     return intention;
   }

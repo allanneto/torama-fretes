@@ -1,17 +1,22 @@
-import { Router } from 'express';
+import { Router } from "express";
 
-import fakeapi from '../api/fakeapi';
+import fakeapi from "../api/fakeapi";
 
-import CreateIntentionService from '../services/CreateIntentionService';
-import UpdateIntentionClientService from '../services/UpdateIntentionClientService';
-import UpdateIntentionLeadStatusService from '../services/UpdateIntentionLeadStatusService';
+import CreateIntentionService from "../services/CreateIntentionService";
+import UpdateIntentionClientService from "../services/UpdateIntentionClientService";
+import UpdateIntentionLeadStatusService from "../services/UpdateIntentionLeadStatusService";
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import IntentionRepository from "../repositories/IntentionRepository";
+import UserRepository from "../repositories/UserRepository";
+
+import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
 const intentionRouter = Router();
 
 //Register new Intention
-intentionRouter.post('/', async (req, res) => {
+intentionRouter.post("/", async (req, res) => {
+  const intentionRepository = new IntentionRepository();
+
   const {
     zip_code_start,
     zip_code_end,
@@ -23,7 +28,7 @@ intentionRouter.post('/', async (req, res) => {
     weight,
   } = req.body;
 
-  const createIntention = new CreateIntentionService();
+  const createIntention = new CreateIntentionService(intentionRepository);
 
   const intention = await createIntention.execute({
     zip_code_start,
@@ -40,8 +45,14 @@ intentionRouter.post('/', async (req, res) => {
 });
 
 // Register client_id
-intentionRouter.put('/:id', async (req, res) => {
-  const updateIntention = new UpdateIntentionClientService();
+intentionRouter.put("/:id", async (req, res) => {
+  const intentionRepository = new IntentionRepository();
+  const usersRepository = new UserRepository();
+
+  const updateIntention = new UpdateIntentionClientService(
+    intentionRepository,
+    usersRepository,
+  );
 
   const idsDTO = {
     client_id: req.body.client_id,
@@ -56,7 +67,7 @@ intentionRouter.put('/:id', async (req, res) => {
 intentionRouter.use(ensureAuthenticated);
 
 // Update lead status
-intentionRouter.put('/:id/lead', async (req, res) => {
+intentionRouter.put("/:id/lead", async (req, res) => {
   const updateIntentionLead = new UpdateIntentionLeadStatusService();
 
   const { freight_id } = req.body;
@@ -71,7 +82,7 @@ intentionRouter.put('/:id/lead', async (req, res) => {
 });
 
 // Intentions return
-intentionRouter.get('/', async (req, res) => {
+intentionRouter.get("/", async (req, res) => {
   return res.json(fakeapi);
 });
 

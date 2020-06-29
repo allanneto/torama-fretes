@@ -1,12 +1,15 @@
-import { Router } from 'express';
+import { Router } from "express";
 
-import CreateUserService from '../services/CreateUserService';
-import AuthenticateUserService from '../services/AuthenticateUserService';
+import UserRepository from "../repositories/UserRepository";
+import CreateUserService from "../services/CreateUserService";
+import AuthenticateUserService from "../services/AuthenticateUserService";
 
 const usersRouter = Router();
 
-usersRouter.post('/', async (req, res) => {
-  const createUser = new CreateUserService();
+usersRouter.post("/", async (req, res) => {
+  const usersRepository = new UserRepository();
+
+  const createUser = new CreateUserService(usersRepository);
   const authenticateUser = new AuthenticateUserService();
 
   const { name, email, telephone, cnpj } = req.body;

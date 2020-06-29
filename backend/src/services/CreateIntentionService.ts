@@ -1,8 +1,5 @@
-import { getRepository } from "typeorm";
-
-import * as Yup from "yup";
 import Intention from "../models/Intention";
-import AppError from "../errors/AppError";
+import IIntentionRepository from "../repositories/IIntentionRepository";
 
 interface Request {
   zip_code_start: string;
@@ -15,20 +12,9 @@ interface Request {
   weight: number;
 }
 
-interface IntentionDTO {
-  zip_code_start: string;
-  zip_code_end: string;
-  volumes: {
-    quantity: number;
-    height: number;
-    length: number;
-    width: number;
-    price: number;
-    weight: number;
-  };
-}
-
 class CreateIntentionService {
+  constructor(private intentionRepository: IIntentionRepository) {}
+
   public async execute(
     {
       height,
@@ -41,40 +27,22 @@ class CreateIntentionService {
       zip_code_start,
     }: Request,
   ): Promise<Intention> {
-    const intentionRepository = getRepository(Intention);
-
-    const schema = Yup.object().shape({
-      zip_code_end: Yup.string().required(),
-      zip_code_start: Yup.string().required(),
-      volumes: Yup.object().shape({
-        quantity: Yup.number().required(),
-        height: Yup.number().required(),
-        length: Yup.number().required(),
-        price: Yup.number().required(),
-        weight: Yup.number().required(),
-      }),
-    });
-
-    const intentionInfo: IntentionDTO = {
+    const intentionData = {
       zip_code_end,
       zip_code_start,
-      volumes: {
-        height,
-        length,
-        price,
-        quantity,
-        weight,
-        width,
-      },
+      height,
+      length,
+      price,
+      quantity,
+      weight,
+      width,
     };
 
-    if (!(await schema.isValid(intentionInfo))) {
-      throw new AppError("Erro na validação.");
+    const intention = await this.intentionRepository.create(intentionData);
+
+    if (!intention) {
+      throw new Error("Erro na base de dados");
     }
-
-    const intention = intentionRepository.create(intentionInfo);
-
-    await intentionRepository.save(intention);
 
     return intention;
   }
