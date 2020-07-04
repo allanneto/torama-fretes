@@ -1,11 +1,11 @@
-import { Router } from 'express';
+import { Router } from "express";
 
-import intentionRouter from './intention.routes';
-import userRouter from './user.routes';
+import intentionRouter from "./intention.routes";
+import userRouter from "./user.routes";
 
 const routes = Router();
 
-routes.use('/intention', intentionRouter);
-routes.use('/user', userRouter);
+routes.use("/intention", intentionRouter);
+routes.use("/user", userRouter);
 
 export default routes;

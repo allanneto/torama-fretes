@@ -67,8 +67,12 @@ intentionRouter.put("/:id", async (req, res) => {
 intentionRouter.use(ensureAuthenticated);
 
 // Update lead status
-intentionRouter.put("/:id/lead", async (req, res) => {
-  const updateIntentionLead = new UpdateIntentionLeadStatusService();
+intentionRouter.post("/:id/lead", async (req, res) => {
+  const intentionRepository = new IntentionRepository();
+
+  const updateIntentionLead = new UpdateIntentionLeadStatusService(
+    intentionRepository,
+  );
 
   const { freight_id } = req.body;
   const intention_id = req.params.id;
