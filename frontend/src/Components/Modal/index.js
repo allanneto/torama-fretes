@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Router from "next/router";
+
 import { Form } from "antd";
 
 import api from "../../services/api";
@@ -9,10 +11,9 @@ import BoxImage from "../../assets/caixa.svg";
 import SubmitButton from "../SubmitButton/index";
 import FormatCnpj from "../../utils/cnpjMask";
 
-export default function Modal({ open, setOpen }) {
+export default function Modal({ open, setOpen, id }) {
   const [cnpj, setCnpj] = useState("");
-  const [user, setUser] = useState([]);
-
+  const [userId, setUserId] = useState("");
   const [form] = Form.useForm();
 
   const validateMessages = {
@@ -23,24 +24,34 @@ export default function Modal({ open, setOpen }) {
     setOpen((current) => !current);
   };
 
+  const handleSave = async (token) => {
+    localStorage.setItem("token", token);
+  };
+
   const handleSubmit = async (values) => {
-    setUser({
-      name: values.nome,
-      email: values.email,
-      telephone: values.telefone,
-      cnpj: values.cnpj,
-    });
+    try {
+      const response = await api.post("/user", {
+        name: values.nome,
+        email: values.email,
+        telephone: values.telefone,
+        cnpj: values.cnpj,
+      });
 
-    const response = await api.post("/user", {
-      name: values.nome,
-      email: values.email,
-      telephone: values.telefone,
-      cnpj: values.cnpj,
-    });
+      const updatedResponse = await api.put(`/intention/${id}`, {
+        headers: {
+          Authorization: `Bearer ${response.data.token}`,
+        },
+        client_id: response.data.user.id,
+      });
 
-    console.log(response.data);
+      await handleSave(response.data.token);
 
-    return setOpen((current) => !current);
+      setOpen((current) => !current);
+
+      return Router.replace("/results");
+    } catch (error) {
+      window.alert("Erro na criação do usuário!");
+    }
   };
 
   return (

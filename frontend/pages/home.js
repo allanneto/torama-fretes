@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Form } from "antd";
+import Head from "next/head";
 
 import Header from "../src/components/Header/index";
 import Footer from "../src/components/Footer/index";
@@ -22,7 +23,7 @@ function Home() {
   const [form] = Form.useForm();
   const [cepOrigem, setCepOrigem] = useState("");
   const [cepDestino, setCepDestino] = useState("");
-  const [intention, setIntention] = useState([]);
+  const [intentionId, setIntentionId] = useState([]);
   const [open, setOpen] = useState(false);
 
   const validateMessages = {
@@ -30,37 +31,37 @@ function Home() {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
+    try {
+      const response = await api.post("/intention", {
+        zip_code_start: values.origem,
+        zip_code_end: values.destino,
+        quantity: 1,
+        height: values.altura,
+        length: values.comprimento,
+        width: values.largura,
+        price: values.preco,
+        weight: values.peso,
+      });
 
-    setIntention({
-      zip_code_start: values.origem,
-      zip_code_end: values.destino,
-      quantity: 1,
-      height: values.altura,
-      length: values.comprimento,
-      width: values.largura,
-      price: values.preco,
-      weight: values.peso,
-    });
+      const { id } = response.data;
 
-    const response = await api.post("/intention", {
-      zip_code_start: values.origem,
-      zip_code_end: values.destino,
-      quantity: 1,
-      height: values.altura,
-      length: values.comprimento,
-      width: values.largura,
-      price: values.preco,
-      weight: values.peso,
-    });
+      setIntentionId(id);
 
-    console.log(response.data);
-    return setOpen((current) => !current);
+      localStorage.setItem("id", id);
+
+      return setOpen((current) => !current);
+    } catch (error) {
+      console.log(error);
+      window.alert(
+        "Falha na criação da intenção de frete, verifique se os dados estão corretos!"
+      );
+    }
   };
 
   return (
     <>
-      <Modal open={open} setOpen={setOpen}></Modal>
+      <Head>SmartEnvios</Head>
+      <Modal open={open} setOpen={setOpen} id={intentionId}></Modal>
       <Styled.Container>
         <Header />
         <Styled.Content>
@@ -198,7 +199,7 @@ function Home() {
                 </SubmitButton>
               </Styled.SubmitBox>
             </Styled.FormBox>
-            <BoxImage onClick={() => setOpen((current) => !current)} />
+            <BoxImage />
           </Styled.ContentBox>
           <Footer></Footer>
         </Styled.Content>
