@@ -53,7 +53,7 @@ function Home() {
     } catch (error) {
       console.log(error);
       window.alert(
-        "Falha na criação da intenção de frete, verifique se os dados estão corretos!"
+        "Falha na criação da intenção de frete, verifique se os dados estão corretos!",
       );
     }
   };
@@ -63,8 +63,8 @@ function Home() {
       <Head>SmartEnvios</Head>
       <Modal open={open} setOpen={setOpen} id={intentionId}></Modal>
       <Styled.Container>
-        <Header />
         <Styled.Content>
+          <Header />
           <Styled.TextWrapper>
             <Styled.MainText>
               Descubra como é <strong>fácil enviar</strong> suas{" "}
@@ -152,7 +152,7 @@ function Home() {
                 </Styled.Label>
               </Styled.HWrapper>
               <Styled.VolumeBox>
-                <strong>Detalhes da encomenda</strong>
+                <strong>Volumes</strong>
                 <Styled.HWrapper>
                   <Styled.Label label="largura" name="largura">
                     <Styled.Input
@@ -187,7 +187,7 @@ function Home() {
               </Styled.VolumeBox>
               <Styled.SubmitBox>
                 <div>
-                  <span>Alguns de nossos parceiros logísticos</span>
+                  <p>Alguns de nossos parceiros logísticos</p>
                   <div>
                     <Sponsor1 />
                     <Sponsor2 />
@@ -201,7 +201,7 @@ function Home() {
             </Styled.FormBox>
             <BoxImage />
           </Styled.ContentBox>
-          <Footer></Footer>
+          <Footer />
         </Styled.Content>
       </Styled.Container>
     </>

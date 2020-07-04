@@ -18,8 +18,12 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  justify-content: center;  
   padding: 0px 100px;
+
+  @media(max-width: 360px){
+    padding: 0;
+  }
 `;
 
 export const TextWrapper = styled.div`
@@ -36,12 +40,22 @@ export const MainText = styled.p`
   span {
     color: #f58634;
   }
+
+  @media(max-width: 360px){
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+  }
 `;
 
 export const DownArrow = styled(DArrow)`
   position: absolute;
   top: -100px;
   left: 45%;
+
+  @media(max-width: 360px){
+    display: none;
+  }
 `;
 
 export const UpArrow = styled(DArrow)`
@@ -49,25 +63,40 @@ export const UpArrow = styled(DArrow)`
   bottom: -25%;
   right: -40px;
   transform: rotate(220deg);
+
+  @media(max-width: 360px){
+    display: none;
+  }
 `;
 
 export const RightArrow = styled(UArrow)`
   position: absolute;
   top: -35%;
   right: -55px;
+
+  @media(max-width: 360px){
+    display: none;
+  }
 `;
 
 export const LeftArrow = styled(UArrow)`
   position: absolute;
   bottom: -100%;
-  right: calc(15% - 100px);
   transform: rotate(130deg);
+
+  @media(max-width: 360px){
+    display: none;
+  }
 `;
 
 export const CardBox = styled(Row)`
   margin: 50px 0;
   display: flex;
   flex-direction: row;
+
+  @media(max-width: 360px){
+    flex-direction: column;
+  }
 `;
 
 export const Column = styled(Col)`
@@ -105,17 +134,34 @@ export const Item = styled(Card)`
     color: #f58634;
     font-size: 18px;
     font-weight: bold;
+
+    @media(max-width: 360px){
+      font-size: 20px;
+    }
   }
 
   .ant-card-body {
     color: #2a5072;
     font-size: 14px;
-    padding: 10px;
+    padding: 10px;    
+
+    @media(max-width: 360px){
+    font-size: 18px;
+    }
+
   }
 
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.3);
+
+  @media(max-width: 360px){
+    margin-bottom: 30px;
+
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
 `;
 
 export const Wrapper = styled(Divider)`
@@ -125,13 +171,32 @@ export const Wrapper = styled(Divider)`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  @media(max-width: 360px){
+    justify-content: center;
+    
+    p {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+  }
 `;
 
 export const ContentBox = styled.div`
   display: flex;
-
+  flex: 1;
   align-items: center;
   justify-content: space-between;
+
+  
+  @media(max-width: 360px){
+    flex-direction: column;
+    margin: 0;
+
+    svg {
+      display: none;
+    }
+  }
 `;
 
 export const VolumeBox = styled.div`
@@ -140,10 +205,23 @@ export const VolumeBox = styled.div`
   flex-direction: column;
   padding: 20px;
 
+
   strong {
     color: #2a5072;
     font-size: 16px;
     margin-bottom: 30px;
+  }
+
+  @media(max-width: 360px){
+    padding: 0;
+
+    span{
+      display: none;
+    }
+
+    strong {
+      font-size: 20px;
+    }
   }
 `;
 
@@ -153,9 +231,18 @@ export const HWrapper = styled.div`
   justify-content: space-between;
   margin-bottom: 30px;
 
+  @media(max-width: 360px){
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   &:first-child {
     padding: 20px;
     justify-content: space-between;
+
+    @media(max-width: 360px){
+      padding: 0;
+    }
   }
 
   &:last-child {
@@ -164,11 +251,19 @@ export const HWrapper = styled.div`
 
     padding: 20px;
     box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
+    
+    @media(max-width: 360px){
+      padding: 0;
+    }
   }
 `;
 
 export const FormBox = styled(Form)`
   margin: 20px;
+
+  @media(max-width: 360px){
+    margin: 0;
+  }
 `;
 
 export const Label = styled(Form.Item).attrs({
@@ -184,6 +279,12 @@ export const Label = styled(Form.Item).attrs({
   &:first-child {
     margin-right: 20px;
   }
+  
+  @media(max-width: 360px){
+    width: 100%;
+    font-size: 18px;
+  }
+
 `;
 
 export const Input = styled.input`
@@ -196,12 +297,17 @@ export const Input = styled.input`
   font-size: 16px;
   color: #044d75;
 
+  padding: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
   ::placeholder {
     color: #044d75;
     text-align: center;
   }
-  padding: 10px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+  @media(max-width: 360px){
+    width: 85%;
+  }
 `;
 
 export const CepInput = styled.input.attrs((props) => ({
@@ -222,14 +328,29 @@ export const CepInput = styled.input.attrs((props) => ({
   ::placeholder {
     color: #044d75;
   }
+
+  @media(max-width: 360px){
+    width: 90%;
+  }
 `;
 
 export const SubmitBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  p {
+    padding: 0;
+    margin: 0;
+  }
+
   svg {
     margin: 15px 10px 0 0;
+  }
+
+  @media(max-width: 360px){
+    p {
+        display: none;
+    }
   }
 `;
 

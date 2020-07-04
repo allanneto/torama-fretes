@@ -102,14 +102,14 @@ export const Cheaper = styled(Barato).attrs((props) => ({
   id: props.id,
 }))`
   ${(props) =>
-    props.id === props.cheap
-      ? css`
+  props.id === props.cheap
+    ? css`
           display: block;
-          @media (max-width: 350px) {
+          @media (max-width: 360px) {
             display: none;
           }
         `
-      : css`
+    : css`
           display: none;
         `}
 `;
@@ -119,15 +119,15 @@ export const MobileCheaper = styled(BaratoMobile).attrs((props) => ({
   id: props.id,
 }))`
   ${(props) =>
-    props.id === props.cheap
-      ? css`
+  props.id === props.cheap
+    ? css`
           display: none;
 
-          @media (max-width: 350px) {
+          @media (max-width: 360px) {
             display: block;
           }
         `
-      : css`
+    : css`
           display: none;
         `}
 `;
@@ -137,14 +137,14 @@ export const Faster = styled(Rapido).attrs((props) => ({
   id: props.id,
 }))`
   ${(props) =>
-    props.id === props.fast
-      ? css`
+  props.id === props.fast
+    ? css`
           display: block;
-          @media (max-width: 350px) {
+          @media (max-width: 360px) {
             display: none;
           }
         `
-      : css`
+    : css`
           display: none;
         `}
 `;
@@ -154,14 +154,14 @@ export const MobileFaster = styled(RapidoMobile).attrs((props) => ({
   id: props.id,
 }))`
   ${(props) =>
-    props.id === props.fast
-      ? css`
+  props.id === props.fast
+    ? css`
           display: none;
-          @media (max-width: 350px) {
+          @media (max-width: 360px) {
             display: block;
           }
         `
-      : css`
+    : css`
           display: none;
         `}
 `;
