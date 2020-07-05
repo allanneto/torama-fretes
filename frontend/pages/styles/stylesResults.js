@@ -21,6 +21,10 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  @media(max-width: 360px){
+    padding: 0;
+  }
 `;
 
 export const MainText = styled.p`
@@ -40,6 +44,11 @@ export const CardBox = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
+
+  @media(max-width: 360px){
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 `;
 
 export const Item = styled(Card)`
@@ -68,6 +77,8 @@ export const Item = styled(Card)`
       opacity: 0.7;
     }
   }
+
+
 `;
 
 export const Title = styled.span`
@@ -170,6 +181,33 @@ export const UserBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+
+
+  @media(max-width: 360px){
+    margin-top: 20px;
+    justify-content: center;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+    }
+
+
+    svg{
+      display: none;
+    }
+
+    p {
+      display: none;
+    }
+  }
 `;
 
 export const UserInfo = styled.div`
@@ -191,12 +229,11 @@ export const UserInfo = styled.div`
   div {
     display: flex;
     flex-direction: column;
+    line-height: 20px;
 
     button {
       width: 180px;
     }
-
-    line-height: 20px;
 
     &:last-child {
       margin-left: 70px;
@@ -206,5 +243,24 @@ export const UserInfo = styled.div`
     a {
       text-decoration: none;
     }
+  }
+
+  @media(max-width: 360px){
+    margin: 0;
+    padding: 20px;
+
+    justify-content: center;
+    flex: 0;
+
+    div {
+      margin-top: 20px;
+      &:last-child {
+        margin-left: 0px;
+        align-items: center;
+      }
+    }
+
+
+    flex-direction: column;
   }
 `;

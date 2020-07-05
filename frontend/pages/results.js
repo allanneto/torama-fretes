@@ -86,32 +86,42 @@ const Results = () => {
           <strong>cotação</strong>
         </Styled.MainText>
         <Styled.CardBox>
-          {!intentions ? (
-            <Styled.MainText>
-              Sem informação de frete disponivel.
-            </Styled.MainText>
-          ) : (
-            intentions.map((intention) => (
-              <Styled.Item onClick={() => handleSelect(intention.id)}>
-                <Truck></Truck>
-                <Styled.Title>Transportadora A</Styled.Title>
-                <Styled.Info>
-                  <div>
-                    <span>Prazo</span>
-                    <strong>4 dias úteis</strong>
-                  </div>
-                  <div>
-                    <span>Prazo</span>
-                    <strong>4 dias úteis</strong>
-                  </div>
-                </Styled.Info>
-                <Styled.Cheaper id={intention.id} cheap={cheapId} />
-                <Styled.MobileCheaper id={intention.id} cheap={cheapId} />
-                <Styled.Faster id={intention.id} fast={fastId} />
-                <Styled.MobileFaster id={intention.id} fast={fastId} />
-              </Styled.Item>
-            ))
-          )}
+          {!intentions
+            ? (
+              <Styled.MainText>
+                Sem informação de frete disponivel.
+              </Styled.MainText>
+            )
+            : (
+              intentions.map((intention) => (
+                <Styled.Item onClick={() => handleSelect(intention.id)}>
+                  <Truck></Truck>
+                  <Styled.Title>Transportadora A</Styled.Title>
+                  <Styled.Info>
+                    <div>
+                      <text>Prazo</text>
+                      <strong>{intention.days} dias úteis</strong>
+                    </div>
+                    <div>
+                      <text>Preço</text>
+                      <strong>R$ {intention.value}</strong>
+                    </div>
+                  </Styled.Info>
+                  <Styled.Cheaper id={intention.id} cheap={cheapId} />
+                  <Styled.MobileCheaper
+                    className="mobile"
+                    id={intention.id}
+                    cheap={cheapId}
+                  />
+                  <Styled.Faster id={intention.id} fast={fastId} />
+                  <Styled.MobileFaster
+                    className="mobile"
+                    id={intention.id}
+                    fast={fastId}
+                  />
+                </Styled.Item>
+              ))
+            )}
         </Styled.CardBox>
         <Styled.UserBox>
           <DeliveryImage />
@@ -119,13 +129,19 @@ const Results = () => {
             <div>
               <strong>PLACELOG SOLUCOES LOGISTICAS - 29.364.024/0001-01</strong>
               <span>
-                <strong>CEP Origem: </strong>
-                Rua do Cep de Origem - 14095-140 - Ribeirão Preto, SP
+                <strong>CEP Origem:</strong>
+                <p>Rua do Cep de Origem -</p>
+                <text>14095-140</text>
+                <p>- Ribeirão Preto, SP</p>
               </span>
               <span>
-                <strong>CEP Destino: </strong>
+                <strong>CEP Destino:</strong>
                 <span>
-                  Rua do Cep de Destion - 14091-220 - Ribeirão Preto, SP
+                  <p>Rua do Cep de Destion -</p>
+                  {" "}
+                  <text>14091-220</text>
+                  {" "}
+                  <p>- Ribeirão Preto, SP</p>
                 </span>
               </span>
             </div>
