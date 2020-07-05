@@ -5,44 +5,154 @@
     "title": "REST API",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "localhost:3333",
   "basePath": "/",
-  "tags": [],
+  "tags": ["Logistica", "Frete"],
   "schemes": ["http"],
   "securityDefinitions": {},
   "consumes": [],
   "produces": [],
   "paths": {
-    "/": {
+    "/intention": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/{id}": {
-      "put": {
-        "tags": [],
-        "description": "",
+        "tags": ["Intention"],
+        "description": "Create a new intention in database",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
+            "name": "zip_code_start",
+            "format": "int64",
+            "in": "body",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "zip_code_end",
+            "format": "int64",
+            "in": "body",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "quantity",
+            "format": "int64",
+            "in": "body",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "height",
+            "format": "int64",
+            "in": "body",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "length",
+            "format": "int64",
+            "in": "body",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "width",
+            "format": "int64",
+            "in": "body",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "price",
+            "format": "int64",
+            "in": "body",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "weight",
+            "format": "int64",
+            "in": "body",
+            "type": "integer",
             "required": true
           }
         ],
         "responses": {}
       }
     },
-    "/{id}/lead": {
+    "intention/{id}": {
       "put": {
-        "tags": [],
-        "description": "",
+        "tags": ["Intention"],
+        "description": "Update client id in database",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "required": true
+          },
+          {
+            "name": "client_id",
+            "in": "body",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "intention/{id}/lead": {
+      "post": {
+        "tags": ["Intention"],
+        "description": "Update lead and freight id after user select an option",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "freight_id",
+            "in": "body",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "intention": {
+      "get": {
+        "tags": ["Intention"],
+        "description": "Return all freight options",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "user/{id}/lead": {
+      "post": {
+        "tags": ["User"],
+        "description": "Create a new User in database",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "body",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "email",
+            "in": "body",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "telephone",
+            "in": "body",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "cnpj",
+            "in": "body",
+            "type": "string",
             "required": true
           }
         ],

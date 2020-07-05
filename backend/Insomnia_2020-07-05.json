@@ -1,0 +1,258 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2020-07-05T14:07:27.774Z",
+  "__export_source": "insomnia.desktop.app:v2020.2.2",
+  "resources": [
+    {
+      "_id": "req_2f0305725d2a482f9a55288d639c7379",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"client_id\": \"f9ded9bd-7c93-41db-8474-c890f2a4dc62\"\n}"
+      },
+      "created": 1592970506508,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_47e468a80fd74db6bc1968152f734f14",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1592970506508,
+      "method": "PUT",
+      "modified": 1593377343805,
+      "name": "Update Client",
+      "parameters": [],
+      "parentId": "fld_9957057e53944fc58a220d9ce494b514",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/intention/917c8a71-8360-4ee6-94b2-daa3e2e4bd09",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_9957057e53944fc58a220d9ce494b514",
+      "created": 1592544536874,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1592750691520,
+      "modified": 1593406445917,
+      "name": "Intention",
+      "parentId": "wrk_7a9cd823530040c18fe45f9caed4ebab",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_7a9cd823530040c18fe45f9caed4ebab",
+      "created": 1592541503469,
+      "description": "",
+      "modified": 1592541503469,
+      "name": "SmartEnvios - Challenge",
+      "parentId": null,
+      "scope": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_18aedf3c349b409081ab5400c6a12c3a",
+      "authentication": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTM4MDEyOTgsImV4cCI6MTU5NDA2MDQ5OCwic3ViIjoiMjFmZTM2YWEtYWQ1NC00NTAyLTlkNTItMGVlMmExZmFlMmYxIn0.-Erbf4jCEi6kg4yhFUwrpAuMI8dYX0vDuErCA6lgyHs",
+        "type": "bearer"
+      },
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"freight_id\": \"61be9c68-1a40-4145-9708-95ccf931f8d4\"\n}"
+      },
+      "created": 1593060678848,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_47e468a80fd74db6bc1968152f734f14",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1592915553986.25,
+      "method": "POST",
+      "modified": 1593834719705,
+      "name": "Update Lead",
+      "parameters": [],
+      "parentId": "fld_9957057e53944fc58a220d9ce494b514",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/intention/2192b4b2-73df-439d-a7b4-de3596bb9d96/lead",
+      "_type": "request"
+    },
+    {
+      "_id": "req_c158a1d3826649cba1f65c56f05500a4",
+      "authentication": {},
+      "body": {},
+      "created": 1593057247565,
+      "description": "",
+      "headers": [
+        {
+          "description": "",
+          "id": "pair_74ffc7618e2b466fa6b22c9a50fdd855",
+          "name": "Authorization",
+          "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTM4MDAxMjYsImV4cCI6MTU5NDA1OTMyNiwic3ViIjoiOGM5OTZmMzUtN2NkYS00MjQxLTllNWYtOGZiYjg3MTM1OTU4In0.AG85byQMsTq4jrpoXarGbsYT2AkA36jra9H0p7XfRmw"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1592860601464.5,
+      "method": "GET",
+      "modified": 1593801386469,
+      "name": "Intentions",
+      "parameters": [],
+      "parentId": "fld_9957057e53944fc58a220d9ce494b514",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/intention",
+      "_type": "request"
+    },
+    {
+      "_id": "req_de6bfd9e9a424422b8e9ba07d2d2450a",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"zip_code_start\": \"3213131231\",\n\t\"zip_code_end\": \"04120120\",\n\t\"quantity\": 1,\n\t\"height\": 10,\n\t\"length\": 15,\n\t\"width\": 20,\n\t\"price\": 100,\n\t\"weight\": 2\n}"
+      },
+      "created": 1592544587959,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_c28af7d818564d04a8b759e3512f72f3",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1592544587959,
+      "method": "POST",
+      "modified": 1592974059619,
+      "name": "Create",
+      "parameters": [],
+      "parentId": "fld_9957057e53944fc58a220d9ce494b514",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/intention",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3ac560c5e9004c7389e9be85a0ec177d",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"SteVASP Ltda\",\n  \"email\": \"register2231h@twitch.com\",\n\t\"telephone\": \"12312312331\",\n  \"cnpj\": \"68.989.810/0001-38\"\n}\n"
+      },
+      "created": 1592750696421,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_ea44d6e0746b40f09d7fb43a8cefc2d9",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1592750696421,
+      "method": "POST",
+      "modified": 1593401326232,
+      "name": "Create",
+      "parameters": [],
+      "parentId": "fld_f055bbc37830418381f040c389393c85",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/user",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_f055bbc37830418381f040c389393c85",
+      "created": 1592750691470,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1592750691470,
+      "modified": 1592750691470,
+      "name": "Users",
+      "parentId": "wrk_7a9cd823530040c18fe45f9caed4ebab",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_488f7cd63a71470a927bb6e46de4096f",
+      "authentication": {},
+      "body": {},
+      "created": 1592542685698,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1592750696371,
+      "method": "GET",
+      "modified": 1593406441084,
+      "name": "Users",
+      "parameters": [],
+      "parentId": "fld_f055bbc37830418381f040c389393c85",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/user",
+      "_type": "request"
+    },
+    {
+      "_id": "env_7c6c5e34115f19a4a1d42363a3f0d4b1edd4e155",
+      "color": null,
+      "created": 1592541503707,
+      "data": { "base_url": "http://localhost:3333" },
+      "dataPropertyOrder": { "&": ["base_url"] },
+      "isPrivate": false,
+      "metaSortKey": 1592541503707,
+      "modified": 1592541530035,
+      "name": "Base Environment",
+      "parentId": "wrk_7a9cd823530040c18fe45f9caed4ebab",
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_7c6c5e34115f19a4a1d42363a3f0d4b1edd4e155",
+      "cookies": [],
+      "created": 1592541503718,
+      "modified": 1592541503718,
+      "name": "Default Jar",
+      "parentId": "wrk_7a9cd823530040c18fe45f9caed4ebab",
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_cd82502712db4a90ad551c6eda221185",
+      "contentType": "yaml",
+      "contents": "",
+      "created": 1592541503479,
+      "fileName": "SmartEnvios - Challenge",
+      "modified": 1592541503479,
+      "parentId": "wrk_7a9cd823530040c18fe45f9caed4ebab",
+      "_type": "api_spec"
+    }
+  ]
+}
