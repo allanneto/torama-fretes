@@ -70,11 +70,17 @@ Primeiro cria um container PostgreSQL para o backend:
 docker run --name smart_api -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 ```
 
-Feito isso agora instale as dependencias e inicie o backend:
+Após o container ser criado, crie uma database com o nome "smart_api" e instale as dependencias:
 
 ```bash
 npm install / yarn install
-npm run dev:server / yarn dev:server
+```
+
+Com as dependencias instaladas é necessario executar as migrations para criação das tabelas no banco de dados e inicie o servidor:
+
+```bash
+  yarn typeorm migration:run
+  npm run dev:server / yarn dev:server
 ```
 
 Deixe o servidor rodando e vamos para o Frontend!
