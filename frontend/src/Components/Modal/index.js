@@ -69,8 +69,8 @@ export default function Modal({ open, setOpen, id }) {
                 <span>Legal!</span>
               </strong>{" "}
               Você está a poucos cliques de enviar sua encomenda através da
-              <strong> SMART</strong>
-              <span>ENVIOS</span>
+              <strong> TORAMA</strong>
+              <span>FRETES</span>
             </Styled.MainText>
             <Styled.Label label="Empresa" name="nome">
               <Styled.Input placeholder="Digite o nome da sua empresa" />

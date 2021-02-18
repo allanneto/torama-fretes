@@ -12,7 +12,7 @@ import api from "../src/services/api";
 
 import Header from "../src/components/Header/index";
 import Footer from "../src/components/Footer/index";
-import SubmitButton from "../src/Components/SubmitButton/index";
+import SubmitButton from "../src/components/SubmitButton/index";
 
 import withAnalytics from "../src/hocs/withAnalytics";
 
@@ -127,7 +127,7 @@ const Results = () => {
           <DeliveryImage />
           <Styled.UserInfo>
             <div>
-              <strong>PLACELOG SOLUCOES LOGISTICAS - 29.364.024/0001-01</strong>
+              <strong>TESTELOG LOGISTICAS - 94.321.264/0001-11</strong>
               <span>
                 <strong>CEP Origem:</strong>
                 <p>Rua do Cep de Origem -</p>
