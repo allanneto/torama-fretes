@@ -1,5 +1,5 @@
 <h1 align="center">
-  SmartEnvios Challenge - 🚛🚚
+  Torama Fretes Project - 🚛🚚
 </h1>
 
 <h2 align="center">
