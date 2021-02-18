@@ -10,7 +10,7 @@ function Footer() {
       <Styled.TextSpan>
         Feito com <BrazilHeart /> no Brasil
       </Styled.TextSpan>
-      <Styled.Text>SmartEnvios - Todos os Direitos Reservados</Styled.Text>
+      <Styled.Text>ToramaFretes - Todos os Direitos Reservados</Styled.Text>
     </Styled.Container>
   );
 }

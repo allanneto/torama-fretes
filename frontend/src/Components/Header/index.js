@@ -1,12 +1,14 @@
 import React from "react";
-
-import Logo from "../../assets/logo-smart.svg";
+import Image from 'next/image';
 import { Container } from "./styles";
 
+// import Logo from "../../assets/toramafretes.png";
+
 function Header() {
+
   return (
     <Container>
-      <Logo />
+      <h1>Torama Fretes</h1>
     </Container>
   );
 }

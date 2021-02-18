@@ -60,7 +60,7 @@ function Home() {
 
   return (
     <>
-      <Head>SmartEnvios</Head>
+      <Head>ToramaFretes</Head>
       <Modal open={open} setOpen={setOpen} id={intentionId}></Modal>
       <Styled.Container>
         <Styled.Content>
@@ -68,8 +68,8 @@ function Home() {
           <Styled.TextWrapper>
             <Styled.MainText>
               Descubra como é <strong>fácil enviar</strong> suas{" "}
-              <strong>encomendas</strong> através da <strong>SMART</strong>
-              <span>ENVIOS</span>
+              <strong>encomendas</strong> através da <strong>TORAMA</strong>
+              <span>FRETES</span>
             </Styled.MainText>
           </Styled.TextWrapper>
           <Styled.CardBox gutter={40}>
@@ -104,7 +104,7 @@ function Home() {
                 </Styled.Circle>
                 Você e seu cliente <b>acompanham</b>
                 todo <b>o trajeto</b>
-                da encomenda através da plataforma SmartEnvios
+                da encomenda através da plataforma ToramaFretes
               </Styled.Item>
               <Styled.UpArrow />
             </Styled.Column>

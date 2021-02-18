@@ -8,6 +8,11 @@ export const Container = styled.div`
 
   padding: 45px 0;
   
+  h1 {
+    color: #2a5072;
+    font-style: italic;
+  }
+
   @media(max-width: 360px){
     padding: 25px 0;
 
